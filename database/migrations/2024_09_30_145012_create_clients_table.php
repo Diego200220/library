@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\rent_book;
+use App\Models\RentBook;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_ name');
-            $table->string('membership_card')->unique();//unique
+            $table->string('membership_card')->unique();
             $table->timestamps();
-            $table->foreignIdFor(rent_book::class)->constrained();
+            $table->foreignIdFor(RentBook::class)->constrained();
 
         });
     }

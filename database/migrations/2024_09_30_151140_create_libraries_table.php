@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\books;
+use App\Models\book;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();// unique
             $table->timestamps();
-            $table->foreignIdFor(books::class)->constrained();
+            $table->foreignIdFor(Book::class)->constrained();
 
         });
     }

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\rent_book;
+use App\Models\rentBook;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('book', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('author');
             $table->string('slug')->unique();
             $table->timestamps();
-            $table->foreignIdFor(rent_book::class)->constrained();//Model- library
+            $table->foreignIdFor(RentBook::class)->constrained();//Model- library
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('book');
     }
 };
