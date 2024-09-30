@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +14,8 @@ return new class extends Migration
     {
         Schema::create('rent_book', function (Blueprint $table) {
             $table->id();
-            $table->string('ticket');// unique
+            $table->string('ticket')->unique();// unique
             $table->timestamps();
-
-
         });
     }
 

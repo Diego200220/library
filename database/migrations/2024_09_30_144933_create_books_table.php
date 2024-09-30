@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,9 +16,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->string('slug'); //unique
+            $table->string('slug')->unique();//unique
             $table->timestamps();
-            $table->foreignIdFor(Model::)
+            $table->foreignIdFor(Model::class)->constrained();
         });
     }
 
