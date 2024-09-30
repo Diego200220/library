@@ -8,8 +8,10 @@ class RentBook extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id',
-        'ticket'
+    protected $fillable = [
+        'ticket',
+        'book_id',
+        'client_id'
     ];
 
 }

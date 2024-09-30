@@ -9,6 +9,11 @@ class Classification extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','name', 'type', 'slug'];
+    protected $fillable = [
+        'name',
+        'type',
+        'slug',
+
+    ];
 
 }
