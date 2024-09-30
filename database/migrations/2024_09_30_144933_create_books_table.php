@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('slug')->unique();
             $table->timestamps();
-            $table->foreignIdFor(RentBook::class)->constrained();//Model- library
+            $table->foreignIdFor(RentBook::class)->constrained();
         });
     }
 
