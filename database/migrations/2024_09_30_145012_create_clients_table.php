@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('last_ name');
+            $table->string('last_name');
             $table->string('membership_card')->unique();
+         //     $table->foreignIdFor(RentBook::class)->constrained();
             $table->timestamps();
-            $table->foreignIdFor(RentBook::class)->constrained();
 
         });
     }

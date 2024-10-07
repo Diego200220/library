@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('classifications', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('type');
+            $table->integer('type');
             $table->string('slug')->unique();
-            $table->foreignIdFor(Book::class)->constrained();
+        //    $table->foreignIdFor(Book::class)->constrained();
             $table->timestamps();
         });
     }

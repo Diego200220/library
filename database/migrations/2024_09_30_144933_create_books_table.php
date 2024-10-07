@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('book', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('author');
             $table->string('slug')->unique();
+            //$table->foreignIdFor(RentBook::class)->constrained();
             $table->timestamps();
-            $table->foreignIdFor(RentBook::class)->constrained();
+
         });
     }
 
