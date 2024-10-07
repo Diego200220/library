@@ -13,6 +13,11 @@ class RentBookSeeder extends Seeder
      */
     public function run(): void
     {
+        RentBook::create([
+            'ticket' => 'ticket001',
+            'book_id' =>'1',
+            'client_id' =>'1'
+        ]);
         RentBook::factory(10)->create();
 
     }
