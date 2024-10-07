@@ -19,7 +19,8 @@ class ClientFactory extends Factory
         return [
             'name'=>$this->faker->name(),
             'last_name'=>$this->faker->lastName(),
-            'membership_card'=>$this->faker->currencyCode()
+            'membership_card'=>$this->faker->text(10),
+
         ];
     }
 }

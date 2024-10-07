@@ -17,7 +17,9 @@ class RentBookFactory extends Factory
     public function definition(): array
     {
         return [
-            'ticket'=>$this->faker->numerify('Ticket ###')
+            'ticket'=>$this->faker->numerify('Ticket###'),
+            'client_id' => $this->faker->randomDigitNotNull('#'),
+            'book_id' => $this->faker->randomDigitNotNull('#')
         ];
     }
 }

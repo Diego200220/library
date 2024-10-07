@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RentBook extends Model
 {
     use HasFactory;
-
+        // Lugar de tener seeders puestos, se puede meter metodo statico create
     protected $fillable = [
         'ticket',
         'book_id',

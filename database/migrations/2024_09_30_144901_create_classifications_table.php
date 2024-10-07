@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('type');
             $table->string('slug')->unique();
-        //    $table->foreignIdFor(Book::class)->constrained();
+
             $table->timestamps();
         });
     }

@@ -19,7 +19,10 @@ class BookFactory extends Factory
         return [
             'title' => $this->faker->jobTitle(),
             'author' => $this->faker->name(),
-            'slug' => $this->faker->slug()
+            'slug' => $this->faker->slug(4),
+            'library_id' => $this->faker->randomDigitNotNull('#'),
+            'classification_id' => $this->faker->randomDigitNotNull('#')
+
         ];
     }
 }

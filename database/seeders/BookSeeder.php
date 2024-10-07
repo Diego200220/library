@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Book;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BookSeeder extends Seeder
 {
@@ -13,13 +14,14 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        $Book = new Book();
+        Book::create([
+            'title' => 'Animales fantasticos',
+            'author' =>'J.K. Rowling',
+            'slug' => 'Animales_fantasticos',
+            'classification_id' => '1',
+            'library_id' => '1'
+        ]);
 
-        $Book->title = 'La divina comedia';
-        $Book->author = 'Dante Alihier';
-        $Book->slug = 'La_divina_comedia';
-
-        $Book->save();
         Book::factory(10)
             ->create();
     }

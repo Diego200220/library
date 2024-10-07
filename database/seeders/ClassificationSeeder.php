@@ -13,12 +13,14 @@ class ClassificationSeeder extends Seeder
      */
     public function run(): void
     {
-        $Classification = new Classification();
-        $Classification->name = 'Body horror';
-        $Classification->type = '12';
-        $Classification->slug = 'Body_Horror';
+        Classification::create([
+            'name' => 'horror Body',
+            'type'=> '12',
+            'slug'=> 'horror_Body'
+        ]);
 
-        $Classification-> save();
+        Classification::factory(10)
+            ->create();
     }
 
 }

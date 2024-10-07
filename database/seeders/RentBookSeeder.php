@@ -13,8 +13,7 @@ class RentBookSeeder extends Seeder
      */
     public function run(): void
     {
-        $RentBook = new RentBook();
+        RentBook::factory(10)->create();
 
-        $RentBook->ticket = '123456789';
     }
 }

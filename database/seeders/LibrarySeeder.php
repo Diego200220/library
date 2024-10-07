@@ -13,11 +13,10 @@ class LibrarySeeder extends Seeder
      */
     public function run(): void
     {
-        $Library = new Library();
-
-        $Library->name = 'Vasconsuelos 2';
-        $Library->slug = 'Vasconsuelos_2';
-
-        $Library->save();
+        Library::create([
+            'name' => 'Animales fantasticos',
+            'slug' =>'J.K. Rowling'
+        ]);
+        Library::factory(10)->create();
     }
 }

@@ -18,8 +18,9 @@ class ClassificationFactory extends Factory
     {
         return [
             'name'=>$this->faker->word(),
-            'type'=>$this->faker->unixTime(200),
-            'slug'=>$this->faker->slug()
+            'type'=>$this->faker->randomDigitNotNull('###'),
+            'slug'=>$this->faker->slug(),
+
 
         ];
     }

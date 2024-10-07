@@ -13,12 +13,7 @@ class ClientSeeder extends Seeder
      */
     public function run(): void
     {
-        $Client = new Client();
+        Client::factory(10)->create();
 
-        $Client->name = 'Diego';
-        $Client->last_name = 'Campos';
-        $Client->membership_card = '123456789';
-
-        $Client->save();
     }
 }

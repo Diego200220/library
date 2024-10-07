@@ -18,12 +18,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Book::factory(10)->create();
-        Classification::factory(10)->create();
-        Client::factory(10)->create();
-        Library::factory(10)->create();
-        RentBook::factory(10)->create();
-
+        $this->call(ClassificationSeeder::class);
+        $this->call(LibrarySeeder::class);
         $this->call(BookSeeder::class);
+        $this->call(ClientSeeder::class);
+        $this->call(RentBookSeeder::class);
     }
 }

@@ -13,6 +13,7 @@ class Book extends Model
         'slug',
         'library_id',
         'classification_id'
+
     ];
 
 }
