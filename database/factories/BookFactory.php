@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
@@ -16,10 +17,11 @@ class BookFactory extends Factory
      */
     public function definition(): array
     {
+        $title = $this->faker->jobTitle();
         return [
-            'title' => $this->faker->jobTitle(),
+            'title' => $title,
             'author' => $this->faker->name(),
-            'slug' => $this->faker->slug(4),
+            'slug' => Str::slug($title),
             'library_id' => $this->faker->randomDigitNotNull('#'),
             'classification_id' => $this->faker->randomDigitNotNull('#')
 

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Classification>
@@ -16,10 +17,11 @@ class ClassificationFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->slug();
         return [
-            'name'=>$this->faker->word(),
+            'name'=>$name,
             'type'=>$this->faker->randomDigitNotNull('###'),
-            'slug'=>$this->faker->slug(),
+            'slug'=> Str::slug($name)
 
 
         ];
