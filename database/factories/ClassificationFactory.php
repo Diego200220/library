@@ -17,13 +17,11 @@ class ClassificationFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->slug();
+        $name = $this->faker->text('50');
         return [
             'name'=>$name,
             'type'=>$this->faker->randomDigitNotNull('###'),
             'slug'=> Str::slug($name)
-
-
         ];
     }
 }

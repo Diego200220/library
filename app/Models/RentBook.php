@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class RentBook extends Model
 {
     use HasFactory;
-        // Lugar de tener seeders puestos, se puede meter metodo statico create
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'ticket',
         'book_id',

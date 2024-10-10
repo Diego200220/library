@@ -20,7 +20,6 @@ class ClientFactory extends Factory
             'name'=>$this->faker->name(),
             'last_name'=>$this->faker->lastName(),
             'membership_card'=>$this->faker->text(10),
-
         ];
     }
 }

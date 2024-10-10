@@ -18,6 +18,7 @@ class RentBookSeeder extends Seeder
             'book_id' =>'1',
             'client_id' =>'1'
         ]);
+
         RentBook::factory(10)->create();
 
     }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('membership_card')->unique();
             $table->timestamps();
-
         });
     }
 
