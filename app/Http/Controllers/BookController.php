@@ -77,8 +77,9 @@ class BookController extends Controller
         $book = Book::find($id);
         $book->title=$request-> input('Title');
         $book->author=$request-> input('Author');
-        $book->slug=$request-> input('Slug');
-        $book->library_id=$request-> input('Library_id');
+        $Slug = $request->input('Title');
+        $book->slug=Str::slug($Slug);
+        $book->library_id=$request-> input('library_id');
         $book->classification_id=$request-> input('Classification_id');
 
         $book->update();

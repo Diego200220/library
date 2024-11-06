@@ -1,10 +1,10 @@
 @extends('home')
 
-@section('content-libraries')
+@section('content-clients')
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Libros</title>
+    <title>Clientes</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -50,7 +50,7 @@
     >
         <div class="col-md-2"></div>
         <div class="col-md-8 mt-4">
-            <h3> Librerias </h3>
+            <h3> Clientes </h3>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                 Nuevo
             </button>
@@ -65,33 +65,37 @@
                     <tr>
                         <th scope="col" style="background-color: #ceae59">ID</th>
                         <th scope="col" style="background-color: #ceae59">Nombre</th>
-                        <th scope="col" style="background-color: #ceae59">Slug</th>
+                        <th scope="col" style="background-color: #ceae59">Apellidos</th>
+                        <th scope="col" style="background-color: #ceae59">Tarjeta de membresia</th>
+
                         <th style="background-color: #ceae59">Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($libraries as $Library)
+                    @foreach($clients as $Client)
                     <tr class="">
-                        <td scope="row" style="background-color: #e1d1a7">{{$Library->id}}</td>
-                        <td style="background-color: #e1d1a7">{{$Library->name}}</td>
-                        <td style="background-color: #e1d1a7">{{$Library->slug}}</td>
-                        <td style="background-color: #e1d1a7"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$Library->id}}">
+                        <td scope="row" style="background-color: #e1d1a7">{{$Client->id}}</td>
+                        <td style="background-color: #e1d1a7">{{$Client->name}}</td>
+                        <td style="background-color: #e1d1a7">{{$Client->last_name}}
+                        <td style="background-color: #e1d1a7">{{$Client->membership_card}}</td>
+
+                        <td style="background-color: #e1d1a7"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$Client->id}}">
                                 Editar
                             </button>
                             <h1>  </h1>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$Library->id}}">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$Client->id}}">
                                 Eliminar
                             </button></td>
                     </tr>
-                    @include('libraries.info')
-                    @include('libraries.delete')
+                    @include('clients.info')
+                    @include('clients.delete')
 
                     @endforeach
 
                     </tbody>
                 </table>
             </div>
-            @include('libraries.create')
+            @include('clients.create')
 
         </div>
         <div class="col-md-2"></div>

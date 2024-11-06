@@ -19,9 +19,11 @@
     </head>
 
     <body>
-
+    @yield('content-clients')
+    @yield('content-libraries')
     @yield('content-books')
     @yield('content')
+    @yield('content-rent-books')
 
     <!-- Bootstrap JavaScript Libraries -->
         <script

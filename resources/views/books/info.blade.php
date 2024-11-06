@@ -5,7 +5,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar clasificacion</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar libro</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{route('Book.update',$Book->id)}}" method="POST">
@@ -37,8 +37,7 @@
                             placeholder=""
                             value="{{$Book->author}}"
                         />
-                        <small id="helpId" class="form-text text-muted">Help text</small>
-                    </div>
+                        </div>
 
                     <div class="mb-3">
                         <label for="" class="form-label">Slug</label>
@@ -50,22 +49,18 @@
                             aria-describedby="helpId"
                             placeholder=""
                             value="{{$Book->slug}}"
+                            disabled
                         />
-                        <small id="helpId" class="form-text text-muted">Help text</small>
+
                     </div>
 
                     <div class="mb-3">
-                        <label for="" class="form-label">Libreria</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="Library_id"
-                            id=""
-                            aria-describedby="helpId"
-                            placeholder=""
-                            value="{{$Book->library_id}}"
-                        />
-                        <small id="helpId" class="form-text text-muted">Help text</small>
+                        <label for="" class="form-label"> Libreria</label>
+                        <select name="library_id" id="" class="form-control">
+                            @foreach($libraries as $libraries)
+                            <option value="{{$libraries->id}}">{{$libraries->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="mb-3">

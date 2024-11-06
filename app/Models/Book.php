@@ -24,4 +24,9 @@ class Book extends Model
     {
         return $this->hasOne(Classification::class,'id', 'classification_id');
     }
+
+    public function LibraryId()
+    {
+        return $this->hasOne(Library::class,'id', 'library_id');
+    }
 }

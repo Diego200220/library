@@ -1,12 +1,10 @@
 @extends('home')
 
-@section('content')
-
-
+@section('content-rent-books')
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Libros</title>
+        <title>Renta</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -50,50 +48,54 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <h3 class="mt-3 mb-2"> Catergorias </h3>
+            <br>
+            <h3> Rentas </h3>
 
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                 Nuevo
             </button>
 
-            <div class="table-responsive mt-2">
-                <table class="table shadow-lg">
-                    <thead class="bg-dark text-white">
-                    <tr>
-                        <th scope="col" style="background-color: #ceae59">ID</th>
-                        <th scope="col" style="background-color: #ceae59">Nombre</th>
-                        <th scope="col" style="background-color: #ceae59">Tipo</th>
-                        <th scope="col" style="background-color: #ceae59">Slug</th>
-                        <th scope="col" style="background-color: #ceae59">T.Creado</th>
-                        <th scope="col" style="background-color: #ceae59">T.Actializado</th>
-                        <th style="background-color: #ceae59">Acciones</th>
-                    </tr>
+            <div class="table-responsive mt-2" style="background-color: #EECE7B">
+                <table class="table shadow-lg" style="background-color: #EECE7B">
+                    <thead class="bg-dark text-white" style="background-color: #EECE7B">
+                        <tr >
+                            <th scope="col" style="background-color: #ceae59">ID</th>
+                            <th scope="col" style="background-color: #ceae59">Ticket</th>
+                            <th scope="col" style="background-color: #ceae59">Libro</th>
+                            <th scope="col" style="background-color: #ceae59">Cliente</th>
+                            <th scope="col" style="background-color: #ceae59">Created_at</th>
+                            <th scope="col" style="background-color: #ceae59">updated_at</th>
+                            <th scope="col" style="background-color: #ceae59">Acciones</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($classifications as $Classification)
-                    <tr class="">
-                        <td scope="row" style="background-color: #e1d1a7">{{$Classification->id}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->name}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->type}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->slug}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->created_at}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->updated_at}}</td>
-                        <td style="background-color: #e1d1a7"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$Classification->id}}">
-                                Editar
-                            </button>
-                            <h1>  </h1>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$Classification->id}}">
-                                Eliminar
-                            </button></td>
-                    </tr>
-                    @include('Classifications.info')
-                    @include('Classifications.delete')
+                    @foreach($rentbooks as $RentBook)
+                        <tr class="">
+                            <td scope="row" style="background-color: #e1d1a7">{{$RentBook->id}}</td>
+                            <td style="background-color: #e1d1a7">{{$RentBook->ticket}}</td>
+                            <td style="background-color: #e1d1a7">{{$RentBook->bookId->title}}</td>
+                            <td style="background-color: #e1d1a7">{{$RentBook->clientId->name}}</td>
+                            <td style="background-color: #e1d1a7">{{$RentBook->created_at}}</td>
+                            <td style="background-color: #e1d1a7">{{$RentBook->updated_at}}</td>
+                            <td style="background-color: #e1d1a7">
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$RentBook->id}}">
+                                    Editar
+                                </button>
+                                <h1>  </h1>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete{{$RentBook->id}}">
+                                    Eliminar
+                                </button></td>
+                        </tr>
+                    @include('RentBooks.info')
+                    @include('RentBooks.delete')
 
                     @endforeach
+
                     </tbody>
                 </table>
             </div>
-            @include('classifications.create')
+        @include('Rentbooks.create')
+
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -115,5 +117,24 @@
 ></script>
 </body>
 </html>
-@endsection
+
+    @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
