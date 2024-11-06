@@ -14,7 +14,6 @@ class RentBookController extends Controller
      */
     public function index()
     {
-        //
         $clients = Client::all();
         $books = Book::all();
         $rentbooks = RentBook::all();
@@ -24,43 +23,16 @@ class RentBookController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-
-        $rent = new RentBook;
-        $rent->ticket=$request-> input('ticket');
-        $rent->book_id=$request-> input('book_id');
-        $rent->client_id=$request-> input('client_id');
-
-        $rent->save();
+        RentBook::create([
+            'ticket' => $request-> input('ticket'),
+            'book_id' => $request-> input('book_id'),
+            'client_id' => $request-> input('client_id')
+        ]);
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -76,7 +48,6 @@ class RentBookController extends Controller
         $rent->update();
         return redirect()->back();
 
-        //
     }
 
     /**
@@ -84,9 +55,7 @@ class RentBookController extends Controller
      */
     public function destroy(string $id)
     {
-        $rent = RentBook::find($id)->delete();
-
+        RentBook::find($id)->delete();
         return redirect()->back();
-        //
     }
 }

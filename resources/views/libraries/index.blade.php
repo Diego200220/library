@@ -22,8 +22,6 @@
 </head>
 <!-- Inicio del cuerpo-->
 <body style="background-color: #EECE7B">
-
-
 <header>
     <!-- place navbar here -->
     <nav class="navbar navbar-expand-lg shadow-lg" style="background-color: #A77A4A">
@@ -85,7 +83,6 @@
                     </tr>
                     @include('libraries.info')
                     @include('libraries.delete')
-
                     @endforeach
 
                     </tbody>
@@ -115,6 +112,4 @@
 ></script>
 </body>
 </html>
-
 @endsection
-

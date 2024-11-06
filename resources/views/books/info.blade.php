@@ -51,7 +51,6 @@
                             value="{{$Book->slug}}"
                             disabled
                         />
-
                     </div>
 
                     <div class="mb-3">
@@ -72,8 +71,6 @@
                         </select>
                     </div>
                 </div>
-
-
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

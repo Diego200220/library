@@ -38,54 +38,27 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $book = new Book;
-        $book->title=$request-> input('Title');
-        $book->author=$request-> input('Author');
-        $book->library_id=$request-> input('Library_id');
-        $book->classification_id=$request-> input('Classification_id');
-        $Slug = $request->input('Title');
-        $book->slug=Str::slug($Slug);
-
-        $book->save();
+        Book::create([
+            'title' => $request-> input('Title'),
+            'author' =>$request-> input('Author'),
+            'slug' => Str::slug($request->input('Title')),
+            'classification_id' => $request-> input('Classification_id'),
+            'library_id' => $request-> input('Library_id')
+        ]);
         return redirect()->back();
-
-        //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $book = Book::find($id);
         $book->title=$request-> input('Title');
         $book->author=$request-> input('Author');
-        $Slug = $request->input('Title');
-        $book->slug=Str::slug($Slug);
+        $book->slug=Str::slug($request->input('Title'));
         $book->library_id=$request-> input('library_id');
         $book->classification_id=$request-> input('Classification_id');
 
         $book->update();
         return redirect()->back();
-
-        //
     }
 
     /**
@@ -93,9 +66,7 @@ class BookController extends Controller
      */
     public function destroy(string $id, Request $classification_id)
     {
-        $book = Book::find($id)->delete();
-
+        Book::find($id)->delete();
         return redirect()->back();
-        //
     }
 }

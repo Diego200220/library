@@ -19,45 +19,19 @@ class ClassificationController extends Controller
         $books = Book::all();
 
         return view('classifications.index',compact('classifications', 'books'));
-        //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $Slug = $request->input('Name');
-        $classifications = new Classification;
-        $classifications->name=$request-> input('Name');
-        $classifications->type=$request-> input('Type');
-        $classifications->slug=Str::slug($Slug);
-        $classifications->save();
+
+        Classification::create([
+            'name' => $request-> input('Name'),
+            'type'=> $request-> input('Type'),
+            'slug'=> Str::slug($request->input('Name'))
+        ]);
         return redirect()->back();
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
         //
     }
 
@@ -70,6 +44,7 @@ class ClassificationController extends Controller
         $classifications->name=$request-> input('Name');
         $classifications->type=$request-> input('Type');
         $classifications->slug=$request-> input('Slug');
+
         $classifications->update();
         return redirect()->back();
         //
@@ -80,7 +55,7 @@ class ClassificationController extends Controller
      */
     public function destroy($id)
     {
-        $classifications = Classification::find($id)->delete();
+        Classification::find($id)->delete();
         return redirect()->back();
         //
     }

@@ -23,7 +23,6 @@
 <!-- Inicio del cuerpo-->
 <body style="background-color: #EECE7B">
 
-
 <header>
     <!-- place navbar here -->
     <nav class="navbar navbar-expand-lg shadow-lg" style="background-color: #A77A4A">
@@ -62,11 +61,8 @@
                             <th scope="col" style="background-color: #ceae59">ID</th>
                             <th scope="col" style="background-color: #ceae59">Titulo</th>
                             <th scope="col" style="background-color: #ceae59">Autor</th>
-                            <th scope="col" style="background-color: #ceae59">Slug</th>
                             <th scope="col" style="background-color: #ceae59">libreria</th>
                             <th scope="col" style="background-color: #ceae59">Clasificacion</th>
-                            <th scope="col" style="background-color: #ceae59">Created_at</th>
-                            <th scope="col" style="background-color: #ceae59">updated_at</th>
                             <th scope="col" style="background-color: #ceae59">Acciones</th>
                         </tr>
                     </thead>
@@ -76,11 +72,8 @@
                             <td scope="row" style="background-color: #e1d1a7">{{$Book->id}}</td>
                             <td style="background-color: #e1d1a7">{{$Book->title}}</td>
                             <td style="background-color: #e1d1a7">{{$Book->author}}</td>
-                            <td style="background-color: #e1d1a7">{{$Book->slug}}</td>
-                            <td style="background-color: #e1d1a7">{{$Book->library_id}}</td>
+                            <td style="background-color: #e1d1a7">{{$Book->libraryId->name}}</td>
                             <td style="background-color: #e1d1a7">{{$Book->ClassificationId->name}}</td>
-                            <td style="background-color: #e1d1a7">{{$Book->created_at}}</td>
-                            <td style="background-color: #e1d1a7">{{$Book->updated_at}}</td>
                             <td style="background-color: #e1d1a7">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$Book->id}}">
                                     Editar
@@ -92,14 +85,12 @@
                         </tr>
                     @include('Books.info')
                     @include('Books.delete')
-
                     @endforeach
 
                     </tbody>
                 </table>
             </div>
         @include('books.create')
-
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -121,24 +112,4 @@
 ></script>
 </body>
 </html>
-
     @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

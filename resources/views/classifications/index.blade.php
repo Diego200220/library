@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +23,6 @@
 </head>
 <!-- Inicio del cuerpo-->
 <body style="background-color: #EECE7B">
-
 
 <header>
     <!-- place navbar here -->
@@ -63,9 +61,6 @@
                         <th scope="col" style="background-color: #ceae59">ID</th>
                         <th scope="col" style="background-color: #ceae59">Nombre</th>
                         <th scope="col" style="background-color: #ceae59">Tipo</th>
-                        <th scope="col" style="background-color: #ceae59">Slug</th>
-                        <th scope="col" style="background-color: #ceae59">T.Creado</th>
-                        <th scope="col" style="background-color: #ceae59">T.Actializado</th>
                         <th style="background-color: #ceae59">Acciones</th>
                     </tr>
                     </thead>
@@ -75,9 +70,6 @@
                         <td scope="row" style="background-color: #e1d1a7">{{$Classification->id}}</td>
                         <td style="background-color: #e1d1a7">{{$Classification->name}}</td>
                         <td style="background-color: #e1d1a7">{{$Classification->type}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->slug}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->created_at}}</td>
-                        <td style="background-color: #e1d1a7">{{$Classification->updated_at}}</td>
                         <td style="background-color: #e1d1a7"><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$Classification->id}}">
                                 Editar
                             </button>
@@ -116,4 +108,3 @@
 </body>
 </html>
 @endsection
-

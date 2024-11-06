@@ -17,47 +17,19 @@ class ClientController extends Controller
         $clients = Client::all();
         return view('clients.index', compact('clients'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        Client::create([
+            'name' => $request-> input('name'),
+            'last_name' =>$request-> input('last_name'),
+            'membership_card' => $request-> input('membership_card')
+        ]);
 
-        $client = new Client;
-
-        $client->name=$request-> input('name');
-        $client->last_name=$request-> input('last_name');
-        $client->membership_card=$request-> input('membership_card');
-
-        $client->save();
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
+          }
     /**
      * Update the specified resource in storage.
      */
@@ -76,7 +48,7 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $client = Client::find($id)->delete();
+        Client::find($id)->delete();
         return redirect()->back();
         //
     }

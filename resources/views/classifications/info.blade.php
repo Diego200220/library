@@ -40,21 +40,6 @@
                         <small id="helpId" class="form-text text-muted">Help text</small>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="" class="form-label">Slug</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="Slug"
-                            id=""
-                            aria-describedby="helpId"
-                            placeholder=""
-                            value="{{$Classification->slug}}"
-                        />
-                        <small id="helpId" class="form-text text-muted">Help text</small>
-                    </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -64,10 +49,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 <!-- Button trigger modal -->
 
 <!-- Modal -->
@@ -92,4 +73,3 @@
         </div>
     </div>
 </div>
-

@@ -50,8 +50,6 @@
                     <small id="helpId" class="form-text text-muted">"Codigo de membesia (233xs)"</small>
                 </div>
 
-
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary">Guardar</button>

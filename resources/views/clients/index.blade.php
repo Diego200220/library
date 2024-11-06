@@ -89,7 +89,6 @@
                     </tr>
                     @include('clients.info')
                     @include('clients.delete')
-
                     @endforeach
 
                     </tbody>
@@ -121,4 +120,3 @@
 </html>
 
 @endsection
-

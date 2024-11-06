@@ -25,9 +25,6 @@
                         />
                         <small id="helpId" class="form-text text-muted">Help text</small>
                     </div>
-
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -37,10 +34,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 <!-- Button trigger modal -->
 
 <!-- Modal -->
@@ -65,4 +58,3 @@
         </div>
     </div>
 </div>
-

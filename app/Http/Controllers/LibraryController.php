@@ -19,43 +19,15 @@ class LibraryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-        $library = new Library;
-
-        $Slug = $request->input('name');
-        $library->name=$request-> input('name');
-        $library->slug=Str::slug($Slug);
-        $library->save();
+        Library::create([
+            'name' => $request-> input('name'),
+            'slug' =>Str::slug($request->input('name'))
+        ]);
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -63,10 +35,9 @@ class LibraryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Slug = $request->input('name');
         $library = Library::find($id);
         $library-> name = $request-> input('name');
-        $library->slug=Str::slug($Slug);
+        $library->slug=Str::slug($request->input('name'));
 
         $library->update();
         return redirect()->back();
@@ -77,7 +48,7 @@ class LibraryController extends Controller
      */
     public function destroy($id)
     {
-        $library = Library::find($id)->delete();
+        Library::find($id)->delete();
         return redirect()->back();
         //
     }

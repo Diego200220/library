@@ -48,10 +48,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 <!-- Button trigger modal -->
 
 <!-- Modal -->
@@ -76,4 +72,3 @@
         </div>
     </div>
 </div>
-
