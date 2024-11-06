@@ -18,6 +18,7 @@ class ClientSeeder extends Seeder
             'last_name' =>'Perez Guzman',
             'membership_card' => '112sa'
         ]);
+
         Client::factory(10)->create();
 
     }

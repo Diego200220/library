@@ -20,9 +20,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('slug')->unique();
-            $table->foreignIdFor(Library::class)->constrained();
-            $table->foreignIdFor(Classification::class)->constrained();
-
+            $table->foreignIdFor(Library::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Classification::class)->constrained()->onDelete('cascade');
             $table->timestamps();
 
         });

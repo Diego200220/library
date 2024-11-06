@@ -17,4 +17,5 @@ class Library extends Model
         'slug',
     ];
 
+
 }

@@ -20,4 +20,5 @@ class Classification extends Model
 
     ];
 
+
 }

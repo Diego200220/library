@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->integer('type');
             $table->string('slug')->unique();
-
             $table->timestamps();
         });
     }

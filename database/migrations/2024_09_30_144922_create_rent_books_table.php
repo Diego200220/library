@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('rent_books', function (Blueprint $table) {
             $table->id();
             $table->string('ticket')->unique();// unique
-            $table->foreignIdFor(Book::class)->constrained();
-            $table->foreignIdFor(Client::class)->constrained();
+            $table->foreignIdFor(Book::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Client::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

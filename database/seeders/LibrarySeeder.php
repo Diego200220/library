@@ -17,6 +17,7 @@ class LibrarySeeder extends Seeder
             'name' => 'Animales fantasticos',
             'slug' =>'J.K. Rowling'
         ]);
+
         Library::factory(10)->create();
     }
 }
