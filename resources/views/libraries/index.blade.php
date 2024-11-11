@@ -1,6 +1,6 @@
 @extends('home')
 
-@section('content-libraries')
+@section('content')
 <!doctype html>
 <html lang="en">
 <head>

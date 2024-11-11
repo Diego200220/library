@@ -25,29 +25,24 @@ class ClassificationController extends Controller
      */
     public function store(Request $request)
     {
-
         Classification::create([
             'name' => $request-> input('Name'),
             'type'=> $request-> input('Type'),
             'slug'=> Str::slug($request->input('Name'))
         ]);
         return redirect()->back();
-        //
     }
-
     /**
      * Update the specified resource in storage.
      */
         public function update(Request $request, $id)
     {
-        $classifications = Classification::find($id);
-        $classifications->name=$request-> input('Name');
-        $classifications->type=$request-> input('Type');
-        $classifications->slug=$request-> input('Slug');
-
-        $classifications->update();
+        Classification::find($id)->update([
+            'name' => $request-> input('Name'),
+            'type'=> $request-> input('Type'),
+            'slug'=> Str::slug($request->input('Name'))
+        ]);
         return redirect()->back();
-        //
     }
 
     /**
@@ -57,6 +52,5 @@ class ClassificationController extends Controller
     {
         Classification::find($id)->delete();
         return redirect()->back();
-        //
     }
 }

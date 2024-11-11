@@ -25,15 +25,6 @@ class BookController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -50,14 +41,14 @@ class BookController extends Controller
 
     public function update(Request $request, $id)
     {
-        $book = Book::find($id);
-        $book->title=$request-> input('Title');
-        $book->author=$request-> input('Author');
-        $book->slug=Str::slug($request->input('Title'));
-        $book->library_id=$request-> input('library_id');
-        $book->classification_id=$request-> input('Classification_id');
 
-        $book->update();
+        Book::find($id)->update([
+            'title'=>$request-> input('Title'),
+            'author'=>$request-> input('Author'),
+            'slug'=> Str::slug($request->input('Title')),
+            'library_id'=> $request-> input('library_id'),
+            'classification_id'=>$request-> input('Classification_id')
+            ]);
         return redirect()->back();
     }
 

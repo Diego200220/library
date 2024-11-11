@@ -20,13 +20,13 @@ class Book extends Model
         'classification_id'
     ];
 
-        public function ClassificationId()
+        public function Classification()
     {
-        return $this->hasOne(Classification::class,'id', 'classification_id');
+        return $this->belongsTo(Classification::class);
     }
 
-    public function LibraryId()
+    public function Library()
     {
-        return $this->hasOne(Library::class,'id', 'library_id');
+        return $this->belongsTo(Library::class);
     }
 }

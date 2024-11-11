@@ -1,6 +1,5 @@
 @extends('home')
-
-@section('content-rent-books')
+@section('content')
 <!doctype html>
 <html lang="en">
 <head>
@@ -63,8 +62,6 @@
                             <th scope="col" style="background-color: #ceae59">Ticket</th>
                             <th scope="col" style="background-color: #ceae59">Libro</th>
                             <th scope="col" style="background-color: #ceae59">Cliente</th>
-                            <th scope="col" style="background-color: #ceae59">Created_at</th>
-                            <th scope="col" style="background-color: #ceae59">updated_at</th>
                             <th scope="col" style="background-color: #ceae59">Acciones</th>
                         </tr>
                     </thead>
@@ -73,10 +70,8 @@
                         <tr class="">
                             <td scope="row" style="background-color: #e1d1a7">{{$RentBook->id}}</td>
                             <td style="background-color: #e1d1a7">{{$RentBook->ticket}}</td>
-                            <td style="background-color: #e1d1a7">{{$RentBook->bookId->title}}</td>
-                            <td style="background-color: #e1d1a7">{{$RentBook->clientId->name}}</td>
-                            <td style="background-color: #e1d1a7">{{$RentBook->created_at}}</td>
-                            <td style="background-color: #e1d1a7">{{$RentBook->updated_at}}</td>
+                            <td style="background-color: #e1d1a7">{{$RentBook->book->title}}</td>
+                            <td style="background-color: #e1d1a7">{{$RentBook->client->name}}</td>
                             <td style="background-color: #e1d1a7">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$RentBook->id}}">
                                     Editar
