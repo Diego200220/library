@@ -17,11 +17,8 @@ class RentBookController extends Controller
         $clients = Client::all();
         $books = Book::all();
         $rentbooks = RentBook::all();
-
         return view('rentbooks.index',compact('books', 'clients', 'rentbooks'));
-
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -40,16 +37,13 @@ class RentBookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rent = RentBook::find($id);
-        $rent->ticket=$request-> input('ticket');
-        $rent->book_id=$request-> input('book_id');
-        $rent->client_id=$request-> input('client_id');
-
-        $rent->update();
+        RentBook::find($id)->update([
+            'ticket' => $request-> input('ticket'),
+            'book_id' => $request-> input('book_id'),
+            'client_id' => $request-> input('client_id')
+        ]);
         return redirect()->back();
-
     }
-
     /**
      * Remove the specified resource from storage.
      */

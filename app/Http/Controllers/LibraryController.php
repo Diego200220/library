@@ -15,7 +15,6 @@ class LibraryController extends Controller
     {
         $libraries = Library::all();
         return view('libraries.index', compact('libraries'));
-
     }
 
     /**
@@ -35,14 +34,13 @@ class LibraryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $library = Library::find($id);
-        $library-> name = $request-> input('name');
-        $library->slug=Str::slug($request->input('name'));
 
-        $library->update();
+        Library::find($id)->update([
+            'name' => $request-> input('name'),
+            'slug' =>Str::slug($request->input('name'))
+        ]);
         return redirect()->back();
     }
-
     /**
      * Remove the specified resource from storage.
      */
@@ -50,6 +48,5 @@ class LibraryController extends Controller
     {
         Library::find($id)->delete();
         return redirect()->back();
-        //
     }
 }

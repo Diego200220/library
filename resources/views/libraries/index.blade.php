@@ -1,6 +1,5 @@
 @extends('home')
-
-@section('content-libraries')
+@section('content')
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,7 +10,6 @@
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
     <!-- Bootstrap CSS v5.2.1 -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -35,9 +33,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -84,16 +80,13 @@
                     @include('libraries.info')
                     @include('libraries.delete')
                     @endforeach
-
                     </tbody>
                 </table>
             </div>
             @include('libraries.create')
-
         </div>
         <div class="col-md-2"></div>
     </div>
-
 </main>
 <footer>
     <!-- place footer here -->
@@ -104,7 +97,6 @@
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"
 ></script>
-
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
     integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"

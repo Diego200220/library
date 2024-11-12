@@ -1,5 +1,4 @@
 <!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="edit{{$RentBook->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -26,7 +25,6 @@
                         />
                         <small id="helpId" class="form-text text-muted">Help text</small>
                     </div>
-
                     <div class="mb-3">
                         <label for="" class="form-label"> Libro</label>
                         <select name="book_id" id="" class="form-control">
@@ -35,7 +33,6 @@
                             @endforeach
                         </select>
                     </div>
-
                     <div class="mb-3">
                         <label for="" class="form-label"> Cliente</label>
                         <select name="client_id" id="" class="form-control">

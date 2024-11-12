@@ -12,8 +12,6 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
-
         $clients = Client::all();
         return view('clients.index', compact('clients'));
     }
@@ -35,11 +33,11 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Client::find($id);
-        $client-> name = $request-> input('name');
-        $client-> last_name = $request-> input('last_name');
-
-        $client->update();
+        Client::find($id)->update([
+            'name' => $request-> input('name'),
+            'last_name' =>$request-> input('last_name'),
+            'membership_card' => $request-> input('membership_card')
+        ]);
         return redirect()->back();
     }
 
@@ -50,6 +48,5 @@ class ClientController extends Controller
     {
         Client::find($id)->delete();
         return redirect()->back();
-        //
     }
 }

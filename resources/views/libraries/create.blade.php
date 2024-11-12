@@ -1,5 +1,4 @@
 <!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -22,7 +21,6 @@
                         placeholder=""
                     />
                 </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary">Guardar</button>

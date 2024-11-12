@@ -1,5 +1,4 @@
 <!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -19,7 +18,6 @@
                         @endforeach
                     </select>
                 </div>
-
                 <div class="mb-3">
                     <label for="" class="form-label">Ticket</label>
                     <input
@@ -32,7 +30,6 @@
                     />
                     <small id="helpId" class="form-text text-muted">TIK001</small>
                 </div>
-
                 <div class="mb-3">
                     <label for="" class="form-label"> Cliente</label>
                     <select name="client_id" id="" class="form-control">

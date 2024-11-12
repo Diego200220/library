@@ -19,18 +19,7 @@ class BookController extends Controller
         $classifications = Classification::all();
         $books = Book::all();
         $libraries = Library::all();
-
         return view('books.index',compact('books', 'classifications', 'libraries'));
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-        //
     }
 
     /**
@@ -39,25 +28,24 @@ class BookController extends Controller
     public function store(Request $request)
     {
         Book::create([
-            'title' => $request-> input('Title'),
-            'author' =>$request-> input('Author'),
-            'slug' => Str::slug($request->input('Title')),
-            'classification_id' => $request-> input('Classification_id'),
-            'library_id' => $request-> input('Library_id')
+            'title' => $request-> input('title'),
+            'author' =>$request-> input('author'),
+            'slug' => Str::slug($request->input('title')),
+            'classification_id' => $request-> input('classification_id'),
+            'library_id' => $request-> input('library_id')
         ]);
         return redirect()->back();
     }
 
     public function update(Request $request, $id)
     {
-        $book = Book::find($id);
-        $book->title=$request-> input('Title');
-        $book->author=$request-> input('Author');
-        $book->slug=Str::slug($request->input('Title'));
-        $book->library_id=$request-> input('library_id');
-        $book->classification_id=$request-> input('Classification_id');
-
-        $book->update();
+        Book::find($id)->update([
+            'title'=>$request-> input('title'),
+            'author'=>$request-> input('author'),
+            'slug'=> Str::slug($request->input('title')),
+            'library_id'=> $request-> input('library_id'),
+            'classification_id'=>$request-> input('classification_id')
+            ]);
         return redirect()->back();
     }
 

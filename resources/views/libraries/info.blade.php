@@ -1,5 +1,4 @@
 <!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="edit{{$Library->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -35,7 +34,6 @@
     </div>
 </div>
 <!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="delete{{$Library->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

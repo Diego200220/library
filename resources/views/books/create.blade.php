@@ -16,7 +16,7 @@
                     <input
                         type="text"
                         class="form-control"
-                        name="Title"
+                        name="title"
                         id=""
                         aria-describedby="helpId"
                         placeholder=""
@@ -29,7 +29,7 @@
                     <input
                         type="text"
                         class="form-control"
-                        name="Author"
+                        name="author"
                         id=""
                         aria-describedby="helpId"
                         placeholder=""
@@ -39,7 +39,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label"> Clasificacion</label>
-                    <select name="Classification_id" id="" class="form-control">
+                    <select name="classification_id" id="" class="form-control">
                         @foreach($classifications as $Classification)
                         <option value="{{$Classification->id}}">{{$Classification->name}}</option>
                         @endforeach
@@ -48,7 +48,7 @@
 
                 <div class="mb-3">
                     <label for="" class="form-label"> Libreria</label>
-                    <select name="Library_id" id="" class="form-control">
+                    <select name="library_id" id="" class="form-control">
                         @foreach($libraries as $Library)
                         <option value="{{$Library->id}}">{{$Library->name}}</option>
                         @endforeach

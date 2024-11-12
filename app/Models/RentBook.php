@@ -17,12 +17,12 @@ class RentBook extends Model
         'book_id',
         'client_id'
     ];
-    public function ClientId()
+    public function client()
     {
-        return $this->hasOne(Client::class,'id', 'client_id');
+        return $this->belongsTo(Client::class);
     }
-    public function BookId()
+    public function book()
     {
-        return $this->hasOne(Book::class,'id', 'book_id');
+        return $this->belongsTo(Book::class);
     }
 }

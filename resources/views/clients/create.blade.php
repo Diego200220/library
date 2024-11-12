@@ -1,5 +1,4 @@
 <!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -23,7 +22,6 @@
                     />
                     <small id="helpId" class="form-text text-muted">"Jose David"</small>
                 </div>
-
                 <div class="mb-3">
                     <label for="" class="form-label">Apellido</label>
                     <input
@@ -36,7 +34,6 @@
                     />
                     <small id="helpId" class="form-text text-muted">"Martinez Paladin"</small>
                 </div>
-
                 <div class="mb-3">
                     <label for="" class="form-label">Tarjeta de membresia</label>
                     <input
@@ -49,7 +46,6 @@
                     />
                     <small id="helpId" class="form-text text-muted">"Codigo de membesia (233xs)"</small>
                 </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 <button type="submit" class="btn btn-primary">Guardar</button>

@@ -17,8 +17,5 @@ class Classification extends Model
         'name',
         'type',
         'slug',
-
     ];
-
-
 }
