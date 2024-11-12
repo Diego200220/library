@@ -10,7 +10,6 @@
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
     <!-- Bootstrap CSS v5.2.1 -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -21,8 +20,6 @@
 </head>
 <!-- Inicio del cuerpo-->
 <body style="background-color: #EECE7B">
-
-
 <header>
     <!-- place navbar here -->
     <nav class="navbar navbar-expand-lg shadow-lg" style="background-color: #A77A4A">
@@ -36,9 +33,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
-
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -49,11 +44,9 @@
         <div class="col-md-8">
             <br>
             <h3> Rentas </h3>
-
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                 Nuevo
             </button>
-
             <div class="table-responsive mt-2" style="background-color: #EECE7B">
                 <table class="table shadow-lg" style="background-color: #EECE7B">
                     <thead class="bg-dark text-white" style="background-color: #EECE7B">
@@ -81,16 +74,14 @@
                                     Eliminar
                                 </button></td>
                         </tr>
+                    <!-- Quitar esto -->
                     @include('RentBooks.info')
                     @include('RentBooks.delete')
-
                     @endforeach
-
                     </tbody>
                 </table>
             </div>
         @include('Rentbooks.create')
-
         </div>
         <div class="col-md-2"></div>
     </div>

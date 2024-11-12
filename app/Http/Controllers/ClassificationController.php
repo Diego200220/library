@@ -17,7 +17,6 @@ class ClassificationController extends Controller
     {
         $classifications = Classification::all();
         $books = Book::all();
-
         return view('classifications.index',compact('classifications', 'books'));
     }
     /**
@@ -26,9 +25,9 @@ class ClassificationController extends Controller
     public function store(Request $request)
     {
         Classification::create([
-            'name' => $request-> input('Name'),
-            'type'=> $request-> input('Type'),
-            'slug'=> Str::slug($request->input('Name'))
+            'name' => $request-> input('name'),
+            'type'=> $request-> input('type'),
+            'slug'=> Str::slug($request->input('name'))
         ]);
         return redirect()->back();
     }
@@ -38,9 +37,9 @@ class ClassificationController extends Controller
         public function update(Request $request, $id)
     {
         Classification::find($id)->update([
-            'name' => $request-> input('Name'),
-            'type'=> $request-> input('Type'),
-            'slug'=> Str::slug($request->input('Name'))
+            'name' => $request-> input('name'),
+            'type'=> $request-> input('type'),
+            'slug'=> Str::slug($request->input('name'))
         ]);
         return redirect()->back();
     }

@@ -17,9 +17,7 @@ class RentBookController extends Controller
         $clients = Client::all();
         $books = Book::all();
         $rentbooks = RentBook::all();
-
         return view('rentbooks.index',compact('books', 'clients', 'rentbooks'));
-
     }
     /**
      * Store a newly created resource in storage.

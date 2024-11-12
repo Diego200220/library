@@ -16,7 +16,7 @@
                     <input
                         type="text"
                         class="form-control"
-                        name="Name"
+                        name="name"
                         id=""
                         aria-describedby="helpId"
                         placeholder=""
@@ -29,7 +29,7 @@
                     <input
                         type="text"
                         class="form-control"
-                        name="Type"
+                        name="type"
                         id=""
                         aria-describedby="helpId"
                         placeholder=""

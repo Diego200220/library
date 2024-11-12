@@ -48,6 +48,5 @@ class ClientController extends Controller
     {
         Client::find($id)->delete();
         return redirect()->back();
-        //
     }
 }

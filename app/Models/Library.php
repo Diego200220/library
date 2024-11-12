@@ -16,6 +16,4 @@ class Library extends Model
         'name',
         'slug',
     ];
-
-
 }

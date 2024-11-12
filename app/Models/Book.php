@@ -19,13 +19,11 @@ class Book extends Model
         'library_id',
         'classification_id'
     ];
-
-        public function Classification()
+        public function classification()
     {
         return $this->belongsTo(Classification::class);
     }
-
-    public function Library()
+    public function library()
     {
         return $this->belongsTo(Library::class);
     }

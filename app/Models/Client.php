@@ -18,5 +18,4 @@ class Client extends Model
         'last_name',
         'membership_card'
     ];
-
 }

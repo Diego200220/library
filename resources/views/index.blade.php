@@ -8,7 +8,6 @@
                 name="viewport"
                 content="width=device-width, initial-scale=1, shrink-to-fit=no"
                     />
-
             <!-- Bootstrap CSS v5.2.1 -->
             <link
                 href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -29,17 +28,13 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
                             </ul>
-
                         </div>
                     </div>
                 </nav>
             </header>
             <main>
-
                 <div class="container mt-4">
-
                     <div class="row" >
                         <div class="col-sm">
                             <div class="card mb-3" style="max-width: 540px; ">
@@ -57,7 +52,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm">
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
@@ -74,7 +68,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-sm">
                             <div class="card mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
@@ -93,7 +86,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm">
                             <div class="card mb-3" style="max-width: 540px;">
@@ -140,7 +132,6 @@
                 integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
                 crossorigin="anonymous"
                     ></script>
-
             <script
                 src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
                 integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"

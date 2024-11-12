@@ -1,5 +1,4 @@
 <!-- Button trigger modal -->
-
 <!-- Modal -->
 <div class="modal fade" id="delete{{$Client->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

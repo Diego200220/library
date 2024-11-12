@@ -17,11 +17,11 @@ class RentBook extends Model
         'book_id',
         'client_id'
     ];
-    public function Client()
+    public function client()
     {
         return $this->belongsTo(Client::class);
     }
-    public function Book()
+    public function book()
     {
         return $this->belongsTo(Book::class);
     }

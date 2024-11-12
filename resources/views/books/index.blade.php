@@ -73,7 +73,7 @@
                             <td style="background-color: #e1d1a7">{{$Book->title}}</td>
                             <td style="background-color: #e1d1a7">{{$Book->author}}</td>
                             <td style="background-color: #e1d1a7">{{$Book->library->name}}</td>
-                            <td style="background-color: #e1d1a7">{{$Book->Classification->name}}</td>
+                            <td style="background-color: #e1d1a7">{{$Book->classification->name}}</td>
                             <td style="background-color: #e1d1a7">
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit{{$Book->id}}">
                                     Editar
