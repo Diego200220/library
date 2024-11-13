@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 
 class ClientController extends Controller
 {
@@ -20,25 +21,32 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        Client::create([
-            'name' => $request-> input('name'),
-            'last_name' =>$request-> input('last_name'),
-            'membership_card' => $request-> input('membership_card')
-        ]);
-
-        return redirect()->back();
+        try {
+            Client::create([
+                'name' => $request->input('name'),
+                'last_name' => $request->input('last_name'),
+                'membership_card' => $request->input('membership_card')
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la creacion de la informacion");
+        }
           }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        Client::find($id)->update([
-            'name' => $request-> input('name'),
-            'last_name' =>$request-> input('last_name'),
-            'membership_card' => $request-> input('membership_card')
-        ]);
-        return redirect()->back();
+        try {
+            Client::find($id)->update([
+                'name' => $request->input('name'),
+                'last_name' => $request->input('last_name'),
+                'membership_card' => $request->input('membership_card')
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la actualizacion de la informacion");
+        }
     }
 
     /**
@@ -46,7 +54,11 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
-        return redirect()->back();
+        try {
+            Client::find($id)->delete();
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la eliminar de la informacion");
+        }
     }
 }

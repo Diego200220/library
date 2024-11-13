@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Client;
 use App\Models\RentBook;
 use Illuminate\Http\Request;
+use mysql_xdevapi\Exception;
 
 class RentBookController extends Controller
 {
@@ -24,32 +25,43 @@ class RentBookController extends Controller
      */
     public function store(Request $request)
     {
-        RentBook::create([
-            'ticket' => $request-> input('ticket'),
-            'book_id' => $request-> input('book_id'),
-            'client_id' => $request-> input('client_id')
-        ]);
-        return redirect()->back();
+        try {
+            RentBook::create([
+                'ticket' => $request->input('ticket'),
+                'book_id' => $request->input('book_id'),
+                'client_id' => $request->input('client_id')
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la creacion de la informacion");
+        }
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        RentBook::find($id)->update([
-            'ticket' => $request-> input('ticket'),
-            'book_id' => $request-> input('book_id'),
-            'client_id' => $request-> input('client_id')
-        ]);
-        return redirect()->back();
+        try {
+            RentBook::find($id)->update([
+                'ticket' => $request->input('ticket'),
+                'book_id' => $request->input('book_id'),
+                'client_id' => $request->input('client_id')
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la actualizacion de la informacion");
+        }
     }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        RentBook::find($id)->delete();
-        return redirect()->back();
+        try {
+            RentBook::find($id)->delete();
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la eliminar de la informacion");
+        }
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Classification;
 
 use Illuminate\Support\Str;
+use mysql_xdevapi\Exception;
 
 class BookController extends Controller
 {
@@ -27,18 +28,23 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        Book::create([
-            'title' => $request-> input('title'),
-            'author' =>$request-> input('author'),
-            'slug' => Str::slug($request->input('title')),
-            'classification_id' => $request-> input('classification_id'),
-            'library_id' => $request-> input('library_id')
-        ]);
-        return redirect()->back();
+        try {
+            Book::create([
+                'title' => $request->input('title'),
+                'author' => $request->input('author'),
+                'slug' => Str::slug($request->input('title')),
+                'classification_id' => $request->input('classification_id'),
+                'library_id' => $request->input('library_id')
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la creacion de la informacion");
+        }
     }
 
     public function update(Request $request, $id)
     {
+        try {
         Book::find($id)->update([
             'title'=>$request-> input('title'),
             'author'=>$request-> input('author'),
@@ -47,14 +53,21 @@ class BookController extends Controller
             'classification_id'=>$request-> input('classification_id')
             ]);
         return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la actualizar de la informacion");
+        }
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id, Request $classification_id)
     {
-        Book::find($id)->delete();
-        return redirect()->back();
+        try {
+            Book::find($id)->delete();
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with("error","Error en la eliminar de la informacion");
+
+        }
     }
 }

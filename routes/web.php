@@ -34,6 +34,7 @@ Route::resource('Book', BookController::class);
 Route::resource('Libraries', LibraryController::class);
 Route::resource('Clients', ClientController::class);
 Route::resource('RentBook', RentBookController::class);
+Route::get('/books/{id}', [BookController::class, 'update'])->name('books.update');
 
 
 
