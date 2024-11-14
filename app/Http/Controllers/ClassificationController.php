@@ -66,4 +66,11 @@ class ClassificationController extends Controller
 
         }
     }
+    public function show($id) {
+        $classification = Classification::find($id);
+        if (!$classification) {
+            return response()->json(['error' => 'classification not found'], 404);
+        }
+        return response()->json(['data' => ['classification' => $classification]]);
+    }
 }

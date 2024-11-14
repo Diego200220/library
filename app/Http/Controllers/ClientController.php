@@ -41,7 +41,6 @@ class ClientController extends Controller
             Client::find($id)->update([
                 'name' => $request->input('name'),
                 'last_name' => $request->input('last_name'),
-                'membership_card' => $request->input('membership_card')
             ]);
             return redirect()->back();
         }catch (Exception $e){
@@ -60,5 +59,12 @@ class ClientController extends Controller
         }catch (Exception $e){
             return redirect()->back()->with("error","Error en la eliminar de la informacion");
         }
+    }
+    public function show($id) {
+        $client = Client::find($id);
+        if (!$client) {
+            return response()->json(['error' => 'client not found'], 404);
+        }
+        return response()->json(['data' => ['client' => $client]]);
     }
 }

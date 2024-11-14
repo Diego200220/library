@@ -64,10 +64,18 @@ class BookController extends Controller
     {
         try {
             Book::find($id)->delete();
+
             return redirect()->back();
         }catch (Exception $e){
             return redirect()->back()->with("error","Error en la eliminar de la informacion");
 
         }
+    }
+    public function show($id) {
+        $book = Book::find($id);
+        if (!$book) {
+            return response()->json(['error' => 'Book not found'], 404);
+        }
+        return response()->json(['data' => ['book' => $book]]);
     }
 }

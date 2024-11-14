@@ -61,4 +61,11 @@ class LibraryController extends Controller
             return redirect()->back()->with("error","Error en la eliminar de la informacion");
         }
     }
+    public function show($id) {
+    $library = Library::find($id);
+    if (!$library) {
+        return response()->json(['error' => 'libraries not found'], 404);
+    }
+    return response()->json(['data' => ['libraries' => $library]]);
+    }
 }

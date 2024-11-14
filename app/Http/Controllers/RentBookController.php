@@ -64,4 +64,11 @@ class RentBookController extends Controller
             return redirect()->back()->with("error","Error en la eliminar de la informacion");
         }
     }
+    public function show($id) {
+        $rentBook = RentBook::find($id);
+        if (!$rentBook) {
+            return response()->json(['error' => 'rentbooks not found'], 405);
+        }
+        return response()->json(['data' => ['rentbooks' => $rentBook]]);
+    }
 }

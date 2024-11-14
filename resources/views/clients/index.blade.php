@@ -9,6 +9,11 @@
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- Bootstrap JavaScript Libraries -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQ+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
         <!-- Bootstrap CSS v5.2.1 -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
@@ -68,15 +73,9 @@
                                         <td style="background-color: #e1d1a7">{{ $Client->last_name }}
                                         <td style="background-color: #e1d1a7">{{ $Client->membership_card }}</td>
 
-                                        <td style="background-color: #e1d1a7"><button type="button" class="btn btn-success"
-                                                data-bs-toggle="modal" data-bs-target="#edit{{ $Client->id }}">
-                                                Editar
-                                            </button>
+                                        <td style="background-color: #e1d1a7"><button type="button" class="btn btn-success" onclick="editClient({{ $Client->id }})">Editar</button>
                                             <h1> </h1>
-                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#delete{{ $Client->id }}">
-                                                Eliminar
-                                            </button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteClient({{ $Client->id }})">Eliminar</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -93,14 +92,14 @@
         <!-- Modales de edición y eliminación fuera del foreach principal -->
         @foreach ($clients as $Client)
         <!-- Modal para Editar -->
-        <div class="modal fade" id="edit{{ $Client->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="edit-client-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Editar cliente</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('Clients.update', $Client->id) }}" method="POST">
+                    <form action="{{ route('Clients.update', ':id') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="modal-body">
@@ -128,7 +127,7 @@
 
 
         <!-- Modal para Eliminar -->
-        <div class="modal fade" id="delete{{ $Client->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="delete-client-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -140,7 +139,7 @@
                         @csrf
                         @method('DELETE')
                         <div class="modal-body">
-                            Estas seguro de eliminar a <strong>{{ $Client->name }}</strong>
+                            Estas seguro de eliminar a este cliente?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -189,6 +188,55 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            const editClientModal = new bootstrap.Modal('#edit-client-modal');
+            const deleteClientModal = new bootstrap.Modal('#delete-client-modal');
+
+            /*
+            Definir una función -> consultar api -> obtener los datos de un libro -> actualizar la acción del formulario -> llenar los inputs del modal -> mostrar el modal
+            */
+            // Definir una función
+            function editClient(clientId) {
+                fetch('{{ route("client.show", ":id") }}'.replace(':id', clientId)) // consultar api
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(response => {
+                        // actualiza los datos del formulario
+                        document.querySelector('#edit-client-modal form').action = `/clients/${clientId}`;
+
+                        // llenado
+                        document.querySelector('#edit-client-modal input[name="name"]').value = response.data.client.name;
+                        document.querySelector('#edit-client-modal input[name="last_name"]').value = response.data.client.last_name;
+
+                        // mostrar el modal
+                        editClientModal.show();
+                    })
+                    .catch(error => console.error('Error fetching JSON:', error));
+            }
+
+            function deleteClient(clientId) {
+                fetch('{{ route("client.show", ":id") }}'.replace(':id', clientId)) // consultar api
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(response => {
+                        // Muestra el id de los datos
+                        document.querySelector('#delete-client-modal form').action = `/clients/${clientId}`;
+
+                        // mostrar el modal
+                        deleteClientModal.show();
+                    })
+                    .catch(error => console.error('Error fetching JSON:', error));
+            }
+        </script>
         <footer>
             <!-- place footer here -->
         </footer>
