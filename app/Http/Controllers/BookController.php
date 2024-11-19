@@ -6,9 +6,8 @@ use App\Models\Book;
 use App\Models\Library;
 use Illuminate\Http\Request;
 use App\Models\Classification;
-
 use Illuminate\Support\Str;
-use mysql_xdevapi\Exception;
+use Exception;
 
 class BookController extends Controller
 {
@@ -38,7 +37,7 @@ class BookController extends Controller
             ]);
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la creacion de la informacion");
+            return redirect()->back()->with('error','Error en la creacion de la informacion');
         }
     }
 
@@ -54,12 +53,13 @@ class BookController extends Controller
             ]);
         return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la actualizar de la informacion");
+            return redirect()->back()->with('error','Error en la actualizar de la informacion');
         }
     }
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy(string $id, Request $classification_id)
     {
         try {
@@ -67,15 +67,16 @@ class BookController extends Controller
 
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la eliminar de la informacion");
+            return redirect()->back()->with('error','Error en la eliminar de la informacion');
 
         }
     }
+
     public function show($id) {
         $book = Book::find($id);
         if (!$book) {
             return response()->json(['error' => 'Book not found'], 404);
         }
-        return response()->json(['data' => ['book' => $book]]);
+        return response()->json(['data' => compact('book')]);
     }
 }

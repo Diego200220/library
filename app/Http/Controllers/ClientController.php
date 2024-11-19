@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
-use mysql_xdevapi\Exception;
+use Exception;
 
 class ClientController extends Controller
 {
@@ -29,7 +29,7 @@ class ClientController extends Controller
             ]);
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la creacion de la informacion");
+            return redirect()->back()->with('error','Error en la creacion de la informacion');
         }
           }
     /**
@@ -44,7 +44,7 @@ class ClientController extends Controller
             ]);
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la actualizacion de la informacion");
+            return redirect()->back()->with('error','Error en la actualizacion de la informacion');
         }
     }
 
@@ -57,14 +57,15 @@ class ClientController extends Controller
             Client::find($id)->delete();
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la eliminar de la informacion");
+            return redirect()->back()->with('error','Error en la eliminar de la informacion');
         }
     }
+
     public function show($id) {
         $client = Client::find($id);
         if (!$client) {
             return response()->json(['error' => 'client not found'], 404);
         }
-        return response()->json(['data' => ['client' => $client]]);
+        return response()->json(['data' => compact('client')]);
     }
 }

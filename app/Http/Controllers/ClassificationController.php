@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Classification;
 
 use Illuminate\Support\Str;
-use mysql_xdevapi\Exception;
+use Exception;
 
 class ClassificationController extends Controller
 {
@@ -33,7 +33,7 @@ class ClassificationController extends Controller
             ]);
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la creacion de la informacion");
+            return redirect()->back()->with('error','Error en la creacion de la informacion');
         }
     }
     /**
@@ -49,7 +49,7 @@ class ClassificationController extends Controller
             ]);
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la actualizacion de la informacion");
+            return redirect()->back()->with('error','Error en la actualizacion de la informacion');
         }
     }
 
@@ -62,15 +62,16 @@ class ClassificationController extends Controller
             Classification::find($id)->delete();
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la eliminar de la informacion");
+            return redirect()->back()->with('error','Error en la eliminar de la informacion');
 
         }
     }
+
     public function show($id) {
         $classification = Classification::find($id);
         if (!$classification) {
             return response()->json(['error' => 'classification not found'], 404);
         }
-        return response()->json(['data' => ['classification' => $classification]]);
+        return response()->json(['data' => compact('classification')]);
     }
 }

@@ -6,7 +6,7 @@ use App\Models\Book;
 use App\Models\Client;
 use App\Models\RentBook;
 use Illuminate\Http\Request;
-use mysql_xdevapi\Exception;
+use Exception;
 
 class RentBookController extends Controller
 {
@@ -33,12 +33,13 @@ class RentBookController extends Controller
             ]);
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la creacion de la informacion");
+            return redirect()->back()->with('error','Error en la creacion de la informacion');
         }
     }
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, $id)
     {
         try {
@@ -49,9 +50,10 @@ class RentBookController extends Controller
             ]);
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la actualizacion de la informacion");
+            return redirect()->back()->with('error','Error en la actualizacion de la informacion');
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -61,14 +63,15 @@ class RentBookController extends Controller
             RentBook::find($id)->delete();
             return redirect()->back();
         }catch (Exception $e){
-            return redirect()->back()->with("error","Error en la eliminar de la informacion");
+            return redirect()->back()->with('error','Error en la eliminar de la informacion');
         }
     }
+
     public function show($id) {
         $rentBook = RentBook::find($id);
         if (!$rentBook) {
             return response()->json(['error' => 'rentbooks not found'], 405);
         }
-        return response()->json(['data' => ['rentbooks' => $rentBook]]);
+        return response()->json(['data' => compact('rentBook')]);
     }
 }

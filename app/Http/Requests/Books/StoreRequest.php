@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
         return [
             'title'=>"required|string|max:80",
             'author'=>"required|string|max:60",
-            'slug'=> "required_with:title|string|max:100|slug",
+            'slug'=> "required_with:title|string|max:100|unique:Book,slug",
         ];
 
     }

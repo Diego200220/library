@@ -221,7 +221,6 @@
                     .then(response => {
                         // actualiza los datos del formulario
                         document.querySelector('#edit-rent-modal form').action = `/RentBook/${rentId}`;
-
                         // llenado
                         document.querySelector('#edit-rent-modal input[name="ticket"]').value = response.data.rentbooks.ticket;
                         document.querySelector('#edit-rent-modal select[name="book_id"]').value = response.data.rentbooks.book_id;
