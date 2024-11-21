@@ -67,11 +67,15 @@ class RentBookController extends Controller
         }
     }
 
-    public function show($id) {
-        $rentBook = RentBook::find($id);
-        if (!$rentBook) {
-            return response()->json(['error' => 'rentbooks not found'], 405);
-        }
-        return response()->json(['data' => compact('rentBook')]);
+    public function show($id)
+    {
+        $rentBook = RentBook::findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'rentbooks' => $rentBook,
+            ],
+        ]);
     }
 }

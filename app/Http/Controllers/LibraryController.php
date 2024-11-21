@@ -65,11 +65,15 @@ class LibraryController extends Controller
         }
     }
 
-    public function show($id) {
-    $library = Library::find($id);
-    if (!$library) {
-        return response()->json(['error' => 'libraries not found'], 404);
-    }
-    return response()->json(['data' => compact('library')]);
+    public function show($id)
+    {
+        $library = Library::findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'libraries' => $library,
+            ],
+        ]);
     }
 }

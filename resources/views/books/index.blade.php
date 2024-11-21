@@ -20,25 +20,7 @@
 
 <body style="background-color: #EECE7B">
 <header>
-    <nav class="navbar navbar-expand-lg shadow-lg" style="background-color: #A77A4A">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <h3>Libreria online</h3>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <x-nav-bar-tables/>
 </header>
 <main>
     <div class="row">
@@ -72,8 +54,8 @@
                         <td style="background-color: #e1d1a7">{{ $Book->library->name }}</td>
                         <td style="background-color: #e1d1a7">{{ $Book->classification->name }}</td>
                         <td style="background-color: #e1d1a7">
-                            <button type="button" class="btn btn-success" onclick="editBook({{ $Book->id }})" >🗒️</button>
-                            <button type="button" class="btn btn-danger" onclick="deleteBook({{ $Book->id }})"  >🛢️</button>
+                            <button type="button" class="btn btn-success" onclick="editBook({{ $Book->id }})" ><img src="img/editar.png" style="width: 23px"></button>
+                            <button type="button" class="btn btn-danger" onclick="deleteBook({{ $Book->id }})"  ><img src="img/eliminar.png" style="width: 23px"></button>
                         </td>
                     </tr>
                     @endforeach
@@ -86,152 +68,106 @@
 </main>
 
 <!-- Modales de edición y eliminación fuera del foreach principal -->
-@foreach ($books as $Book)
 <!-- Modal para Editar -->
-<div class="modal fade" id="edit-book-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Editar libro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{ route('Book.update',':id') }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Titulo</label>
-                        <input type="text" class="form-control" name="title" id=""
-                               aria-describedby="helpId" placeholder="" value="{{ $Book->title }}" />
-                        <small id="helpId" class="form-text text-muted">Help text</small>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label">Autor</label>
-                        <input type="text" class="form-control" name="author" id=""
-                               aria-describedby="helpId" placeholder="" value="{{ $Book->author }}" />
-                    </div>
+<x-modal-edit
+    id="edit-book-modal"
+    labelledBy="exampleModalLabel"
+    title="Editar libro"
+    action="{{ route('Book.update', $Book->id) }}"
+    method="PUT"
+    submitText="Guardar">
 
-                    <div class="mb-3">
-                        <label for="" class="form-label">Slug</label>
-                        <input type="text" class="form-control" name="slug" id=""
-                               aria-describedby="helpId" placeholder="" value="{{ $Book->slug }}" disabled />
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Libreria</label>
-                        <select name="library_id" id="" class="form-control">
-                            @foreach ($libraries as $library)
-                            <option value="{{ $library->id }}">{{ $library->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Classificacion</label>
-                        <select name="classification_id" id="" class="form-control">
-                            @foreach ($classifications as $Classification)
-                            <option value="{{ optional($Classification)->id }}">{{ optional($Classification)->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </form>
-        </div>
+    <div class="mb-3">
+        <label for="title" class="form-label">Titulo</label>
+        <input type="text" class="form-control" name="title" value="{{ $Book->title }}" />
     </div>
-</div>
-
+    <div class="mb-3">
+        <label for="author" class="form-label">Autor</label>
+        <input type="text" class="form-control" name="author" value="{{ $Book->author }}" />
+    </div>
+    <div class="mb-3">
+        <label for="slug" class="form-label">Slug</label>
+        <input type="text" class="form-control" name="slug" value="{{ $Book->slug }}" disabled />
+    </div>
+    <div class="mb-3">
+        <label for="library_id" class="form-label">Libreria</label>
+        <select name="library_id" class="form-control">
+            @foreach ($libraries as $library)
+            <option value="{{ $library->id }}">{{ $library->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="classification_id" class="form-label">Clasificación</label>
+        <select name="classification_id" class="form-control">
+            @foreach ($classifications as $classification)
+            <option value="{{ optional($classification)->id }}">{{ optional($classification)->name }}</option>
+            @endforeach
+        </select>
+    </div>
+</x-modal-edit>
 
 <!-- Modal para Eliminar -->
-<div class="modal fade" id="delete-book-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar libro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <form action="{{ route('Book.destroy',':id') }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    Estas seguro de eliminar este libro?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-@endforeach
+<x-modal-destroy
+    id="delete-book-modal"
+    title="Eliminar libro"
+    action="{{ route('Book.destroy', ':id') }}"
+    confirmationText="¿Estás seguro de eliminar este libro?"
+    confirmButtonText="Eliminar"
+    cancelButtonText="Cancelar"
+/>
 
 <!-- Modal para Crear un nuevo libro -->
-<div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar libros</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="{{route('Book.store')}}" method="POST">
-                @csrf
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="" class="form-label">Titulo</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="title"
-                            id=""
-                            aria-describedby="helpId"
-                            placeholder=""
-                        />
-                        <small id="helpId" class="form-text text-muted">"Harry Potter"</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label">Autor</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="author"
-                            id=""
-                            aria-describedby="helpId"
-                            placeholder=""
-                        />
-                        <small id="helpId" class="form-text text-muted">Pablo Neruda</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Clasificacion</label>
-                        <select name="classification_id" id="" class="form-control">
-                            @foreach($classifications as $Classification)
-                            <option value="{{$Classification->id}}">{{$Classification->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="" class="form-label"> Libreria</label>
-                        <select name="library_id" id="" class="form-control">
-                            @foreach($libraries as $Library)
-                            <option value="{{$Library->id}}">{{$Library->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-            </form>
-        </div>
+<x-modal-create
+    id="create"
+    title="Agregar Libro"
+    :action="route('Book.store')"
+>
+    <div class="mb-3">
+        <label for="" class="form-label">Titulo</label>
+        <input
+            type="text"
+            class="form-control"
+            name="title"
+            id=""
+            aria-describedby="helpId"
+            placeholder=""
+        />
+        <small id="helpId" class="form-text text-muted">"Harry Potter"</small>
     </div>
-</div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Autor</label>
+        <input
+            type="text"
+            class="form-control"
+            name="author"
+            id=""
+            aria-describedby="helpId"
+            placeholder=""
+        />
+        <small id="helpId" class="form-text text-muted">Pablo Neruda</small>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label"> Clasificacion</label>
+        <select name="classification_id" id="" class="form-control">
+            @foreach($classifications as $Classification)
+            <option value="{{$Classification->id}}">{{$Classification->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label"> Libreria</label>
+        <select name="library_id" id="" class="form-control">
+            @foreach($libraries as $Library)
+            <option value="{{$Library->id}}">{{$Library->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+</x-modal-create>
     <script>
         const editBookModal = new bootstrap.Modal('#edit-book-modal');
         const deleteBookModal = new bootstrap.Modal('#delete-book-modal');
@@ -262,7 +198,7 @@
                     // mostrar el modal
                     editBookModal.show();
                 })
-                .catch(error => console.error('Error fetching JSON:', error));
+                .catch(error => window.alert('Error fetching JSON:', error));
         }
 
         function deleteBook(bookId) {
@@ -280,17 +216,9 @@
                     // mostrar el modal
                     deleteBookModal.show();
                 })
-                .catch(error => console.error('Error fetching JSON:', error));
+                .catch(error => window.alert('Error fetching JSON:', error));
         }
     </script>
-
-<!-- Scripts de Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-</script>
 </body>
 
 </html>

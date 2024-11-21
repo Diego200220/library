@@ -22,25 +22,8 @@
     <body style="background-color: #EECE7B">
         <header>
             <!-- place navbar here -->
-            <nav class="navbar navbar-expand-lg shadow-lg" style="background-color: #A77A4A">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <h3>Libreria online</h3>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <x-nav-bar-tables/>
+
         </header>
         <main>
             <div class="row">
@@ -67,9 +50,8 @@
                                         <td style="background-color: #e1d1a7">{{ $Library->name }}</td>
                                         <td style="background-color: #e1d1a7">{{ $Library->slug }}</td>
                                         <td style="background-color: #e1d1a7">
-                                            <button type="button" class="btn btn-success" onclick="editLibrary({{ $Library->id }})">Editar</button>
-                                            <h1> </h1>
-                                            <button type="button" class="btn btn-danger" onclick="deleteLibrary({{ $Library->id }})">Eliminar</button>
+                                            <button type="button" class="btn btn-success" onclick="editLibrary({{ $Library->id }})"><img src="img/editar.png" style="width: 23px"></button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteLibrary({{ $Library->id }})"><img src="img/eliminar.png" style="width: 23px"></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -81,87 +63,48 @@
             </div>
         </main>
 
-        <!-- Modales de edición y eliminación fuera del foreach principal -->
-        @foreach ($libraries as $Library)
         <!-- Modal para Editar -->
-        <div class="modal fade" id="edit-library-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar libreria</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('Libraries.update', ':id') }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" name="name" id=""
-                                       aria-describedby="helpId" placeholder="" value="{{ $Library->name }}" />
-                                <small id="helpId" class="form-text text-muted">Help text</small>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
-                </div>
+        <x-modal-edit
+            id="edit-library-modal"
+            labelledBy="editLibraryLabel"
+            title="Editar Librería"
+            action="{{ route('Libraries.update', $Library->id) }}"
+            method="PUT"
+            submitText="Guardar">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="name"
+                    value="{{ $Library->name }}"
+                    placeholder="Nombre de la librería" />
+                <small class="form-text text-muted">Por ejemplo: Biblioteca Central.</small>
             </div>
-        </div>
-
-
+        </x-modal-edit>
         <!-- Modal para Eliminar -->
-        <div class="modal fade" id="delete-library-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar clasificacion</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('Libraries.destroy', ':id') }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <div class="modal-body">
-                            Estas seguro de eliminar esta libreria?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Confirmar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-        @endforeach
-
+        <x-modal-destroy
+            id="delete-library-modal"
+            title="Eliminar Libreria"
+            :action="route('Libraries.destroy', ':id')"
+            confirmationText="¿Estás seguro de eliminar a esta libreria?"
+            confirmButtonText="Confirmar"
+            cancelButtonText="Cerrar"
+        />
         <!-- Modal para Crear un nuevo libro -->
-        <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agregar libros</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('Libraries.store') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" name="name" id=""
-                                       aria-describedby="helpId" placeholder="" />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                    </form>
-                </div>
+
+        <x-modal-create
+            id="create"
+            title="Agregar Libreria"
+            :action="route('Libraries.store')"
+        >
+            <div class="mb-3">
+                <label for="" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="name" id=""
+                       aria-describedby="helpId" placeholder="" />
             </div>
-        </div>
+        </x-modal-create>
 
         <script>
             const editLibraryModal = new bootstrap.Modal('#edit-library-modal');
@@ -171,7 +114,7 @@
             */
             // Definir una función
             function editLibrary(libraryId) {
-                fetch('{{ route("library.show", ":id") }}'.replace(':id', libraryId)) // consultar api
+                fetch('{{ route("libraries.show", ":id") }}'.replace(':id', libraryId)) // consultar api
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -188,12 +131,12 @@
                         // mostrar el modal
                         editLibraryModal.show();
                     })
-                    .catch(error => console.error('Error fetching JSON:', error));
+                    .catch(error =>  window.alert('Error fetching JSON:', error));
             }
 
             const deleteLibraryModal = new bootstrap.Modal('#delete-library-modal');
             function deleteLibrary(libraryId) {
-                fetch('{{ route("library.show", ":id") }}'.replace(':id', libraryId)) // consultar api
+                fetch('{{ route("libraries.show", ":id") }}'.replace(':id', libraryId)) // consultar api
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -207,19 +150,12 @@
                         // mostrar el modal
                         deleteLibraryModal.show();
                     })
-                    .catch(error => console.error('Error fetching JSON:', error));
+                    .catch(error =>  window.alert('Error fetching JSON:', error));
             }
         </script>
         <footer>
             <!-- place footer here -->
         </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-        </script>
     </body>
 
     </html>

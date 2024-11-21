@@ -23,27 +23,8 @@
     <body style="background-color: #EECE7B">
         <header>
             <!-- place navbar here -->
-            <nav class="navbar navbar-expand-lg shadow-lg" style="background-color: #A77A4A">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <h3>Libreria online</h3>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
-                            </li>
+            <x-nav-bar-tables/>
 
-                        </ul>
-
-                    </div>
-                </div>
-            </nav>
         </header>
         <main>
             <div class="row">
@@ -73,9 +54,9 @@
                                         <td style="background-color: #e1d1a7">{{ $Client->last_name }}
                                         <td style="background-color: #e1d1a7">{{ $Client->membership_card }}</td>
 
-                                        <td style="background-color: #e1d1a7"><button type="button" class="btn btn-success" onclick="editClient({{ $Client->id }})">Editar</button>
-                                            <h1> </h1>
-                                            <button type="button" class="btn btn-danger" onclick="deleteClient({{ $Client->id }})">Eliminar</button>
+                                        <td style="background-color: #e1d1a7">
+                                            <button type="button" class="btn btn-success" onclick="editClient({{ $Client->id }})"><img src="img/editar.png" style="width: 23px"></button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteClient({{ $Client->id }})"><img src="img/eliminar.png" style="width: 23px"></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -90,105 +71,71 @@
 
         </main>
         <!-- Modales de edición y eliminación fuera del foreach principal -->
-        @foreach ($clients as $Client)
         <!-- Modal para Editar -->
-        <div class="modal fade" id="edit-client-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar cliente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('Clients.update', ':id') }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" name="name" id=""
-                                       aria-describedby="helpId" placeholder="" value="{{ $Client->name }}" />
-                                <small id="helpId" class="form-text text-muted">Help text</small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" name="last_name" id=""
-                                       aria-describedby="helpId" placeholder="" value="{{ $Client->last_name }}" />
-                                <small id="helpId" class="form-text text-muted">Help text</small>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
-                </div>
+        <x-modal-edit
+            id="edit-client-modal"
+            labelledBy="editClientLabel"
+            title="Editar Cliente"
+            action="{{ route('Clients.update', $Client->id) }}"
+            method="PUT"
+            submitText="Guardar">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="name"
+                    value="{{ $Client->name }}"
+                    placeholder="Nombre del cliente" />
+                <small class="form-text text-muted">Por ejemplo: Juan.</small>
             </div>
-        </div>
-
-
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Apellido</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="last_name"
+                    id="last_name"
+                    value="{{ $Client->last_name }}"
+                    placeholder="Apellido del cliente" />
+                <small class="form-text text-muted">Por ejemplo: Pérez.</small>
+            </div>
+        </x-modal-edit>
         <!-- Modal para Eliminar -->
-        <div class="modal fade" id="delete-client-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Eliminar cliente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('Clients.destroy', $Client->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <div class="modal-body">
-                            Estas seguro de eliminar a este cliente?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Confirmar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        @endforeach
-
+        <x-modal-destroy
+            id="delete-client-modal"
+            title="Eliminar Cliente"
+            :action="route('Clients.destroy', ':id')"
+            confirmationText="¿Estás seguro de eliminar a este cliente?"
+            confirmButtonText="Confirmar"
+            cancelButtonText="Cerrar"
+        />
         <!-- Modal para Crear un nuevo libro -->
-        <div class="modal fade" id="create" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agregar cliente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('Clients.store') }}" method="POST">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" name="name" id=""
-                                       aria-describedby="helpId" placeholder="" />
-                                <small id="helpId" class="form-text text-muted">"Jose David"</small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" name="last_name" id=""
-                                       aria-describedby="helpId" placeholder="" />
-                                <small id="helpId" class="form-text text-muted">"Martinez Paladin"</small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Tarjeta de membresia</label>
-                                <input type="text" class="form-control" name="membership_card" id=""
-                                       aria-describedby="helpId" placeholder="" />
-                                <small id="helpId" class="form-text text-muted">"Codigo de membesia (233xs)"</small>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                    </form>
-                </div>
+        <x-modal-create
+            id="create"
+            title="Agregar Cliente"
+            :action="route('Clients.store')"
+        >
+            <div class="mb-3">
+                <label for="" class="form-label">Nombre</label>
+                <input type="text" class="form-control" name="name" id=""
+                       aria-describedby="helpId" placeholder="" />
+                <small id="helpId" class="form-text text-muted">"Jose David"</small>
             </div>
-        </div>
-
+            <div class="mb-3">
+                <label for="" class="form-label">Apellido</label>
+                <input type="text" class="form-control" name="last_name" id=""
+                       aria-describedby="helpId" placeholder="" />
+                <small id="helpId" class="form-text text-muted">"Martinez Paladin"</small>
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Tarjeta de membresia</label>
+                <input type="text" class="form-control" name="membership_card" id=""
+                       aria-describedby="helpId" placeholder="" />
+                <small id="helpId" class="form-text text-muted">"Codigo de membesia (233xs)"</small>
+            </div>
+        </x-modal-create>
         <script>
             const editClientModal = new bootstrap.Modal('#edit-client-modal');
             const deleteClientModal = new bootstrap.Modal('#delete-client-modal');
@@ -198,7 +145,7 @@
             */
             // Definir una función
             function editClient(clientId) {
-                fetch('{{ route("client.show", ":id") }}'.replace(':id', clientId)) // consultar api
+                fetch('{{ route("clients.show", ":id") }}'.replace(':id', clientId)) // consultar api
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -216,11 +163,11 @@
                         // mostrar el modal
                         editClientModal.show();
                     })
-                    .catch(error => console.error('Error fetching JSON:', error));
+                    .catch(error =>  window.alert('Error fetching JSON:', error));
             }
 
             function deleteClient(clientId) {
-                fetch('{{ route("client.show", ":id") }}'.replace(':id', clientId)) // consultar api
+                fetch('{{ route("clients.show", ":id") }}'.replace(':id', clientId)) // consultar api
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -234,20 +181,13 @@
                         // mostrar el modal
                         deleteClientModal.show();
                     })
-                    .catch(error => console.error('Error fetching JSON:', error));
+                    .catch(error =>  window.alert('Error fetching JSON:', error));
             }
         </script>
         <footer>
             <!-- place footer here -->
         </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-        </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-        </script>
     </body>
 
     </html>
