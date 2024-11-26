@@ -21,5 +21,5 @@ use Illuminate\Support\Facades\Route;
 Route::resource('Libraries', LibraryController::class);
 Route::resource('Book', BookController::class);
 Route::resource('Classification', ClassificationController::class);
-Route::resource('Clients', ClientController::class);
+Route::resource('Client', ClientController::class);
 Route::resource('RentBook', RentBookController::class);
