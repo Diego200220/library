@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Exception;
 
 class ClientController extends Controller
 {
@@ -20,25 +21,31 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        Client::create([
-            'name' => $request-> input('name'),
-            'last_name' =>$request-> input('last_name'),
-            'membership_card' => $request-> input('membership_card')
-        ]);
-
-        return redirect()->back();
+        try {
+            Client::create([
+                'name' => $request->input('name'),
+                'last_name' => $request->input('last_name'),
+                'membership_card' => $request->input('membership_card')
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la creacion de la informacion');
+        }
           }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
     {
-        Client::find($id)->update([
-            'name' => $request-> input('name'),
-            'last_name' =>$request-> input('last_name'),
-            'membership_card' => $request-> input('membership_card')
-        ]);
-        return redirect()->back();
+        try {
+            Client::find($id)->update([
+                'name' => $request->input('name'),
+                'last_name' => $request->input('last_name'),
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la actualizacion de la informacion');
+        }
     }
 
     /**
@@ -46,7 +53,19 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
-        return redirect()->back();
+        try {
+            Client::find($id)->delete();
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la eliminar de la informacion');
+        }
+    }
+
+    public function show($id) {
+        $client = Client::find($id);
+        if (!$client) {
+            return response()->json(['error' => 'client not found'], 404);
+        }
+        return response()->json(['data' => compact('client')]);
     }
 }

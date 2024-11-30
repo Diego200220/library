@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Library;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Exception;
 
 class LibraryController extends Controller
 {
@@ -20,33 +21,59 @@ class LibraryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
-        Library::create([
-            'name' => $request-> input('name'),
-            'slug' =>Str::slug($request->input('name'))
-        ]);
-        return redirect()->back();
+        try {
+            Library::create([
+                'name' => $request->input('name'),
+                'slug' => Str::slug($request->input('name'))
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la creacion de la informacion');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, $id)
     {
-
-        Library::find($id)->update([
-            'name' => $request-> input('name'),
-            'slug' =>Str::slug($request->input('name'))
-        ]);
-        return redirect()->back();
+        try {
+            Library::find($id)->update([
+                'name' => $request->input('name'),
+                'slug' => Str::slug($request->input('name'))
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la actualizacion de la informacion');
+        }
     }
     /**
      * Remove the specified resource from storage.
      */
+
     public function destroy($id)
     {
-        Library::find($id)->delete();
-        return redirect()->back();
+        try {
+            Library::find($id)->delete();
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la eliminar de la informacion');
+        }
+    }
+
+    public function show($id)
+    {
+        $library = Library::findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'libraries' => $library,
+            ],
+        ]);
     }
 }

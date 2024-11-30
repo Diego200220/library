@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Classification;
 
 use Illuminate\Support\Str;
+use Exception;
 
 class ClassificationController extends Controller
 {
@@ -24,24 +25,32 @@ class ClassificationController extends Controller
      */
     public function store(Request $request)
     {
-        Classification::create([
-            'name' => $request-> input('name'),
-            'type'=> $request-> input('type'),
-            'slug'=> Str::slug($request->input('name'))
-        ]);
-        return redirect()->back();
+        try {
+            Classification::create([
+                'name' => $request->input('name'),
+                'type' => $request->input('type'),
+                'slug' => Str::slug($request->input('name'))
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la creacion de la informacion');
+        }
     }
     /**
      * Update the specified resource in storage.
      */
-        public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        Classification::find($id)->update([
-            'name' => $request-> input('name'),
-            'type'=> $request-> input('type'),
-            'slug'=> Str::slug($request->input('name'))
-        ]);
-        return redirect()->back();
+        try {
+            Classification::find($id)->update([
+                'name' => $request->input('name'),
+                'type' => $request->input('type'),
+                'slug' => Str::slug($request->input('name'))
+            ]);
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la actualizacion de la informacion');
+        }
     }
 
     /**
@@ -49,7 +58,20 @@ class ClassificationController extends Controller
      */
     public function destroy($id)
     {
-        Classification::find($id)->delete();
-        return redirect()->back();
+        try {
+            Classification::find($id)->delete();
+            return redirect()->back();
+        }catch (Exception $e){
+            return redirect()->back()->with('error','Error en la eliminar de la informacion');
+
+        }
+    }
+
+    public function show($id) {
+        $classification = Classification::find($id);
+        if (!$classification) {
+            return response()->json(['error' => 'classification not found'], 404);
+        }
+        return response()->json(['data' => compact('classification')]);
     }
 }
